@@ -1,30 +1,40 @@
 const connection = require("./connection");
 let orm = {
-  selectAll: () => {
-    let query = "SELECT * FROM burgers";
-    connection.connect(query, (err, result) => {
-      if (err) {
-        throw err;
-      }
-      console.log(result);
+  selectAll: function () {
+    return new Promise((resolve, reject) => {
+      let query = "SELECT * FROM burgers";
+
+      connection.query(query, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
     });
   },
-  insertOne: (burger, eaten) => {
-    let query = "INSERT INTO burgers (burger_name, devoured) VALUES (?, ?)";
-    connection.connect(query, [burger, eaten], (err, result) => {
-      if (err) {
-        throw err;
-      }
-      console.log(result);
+  insertOne: function (burger, eaten) {
+    return new Promise((resolve, reject) => {
+      let query = "INSERT INTO burgers (burger_name, devoured) VALUES (?, ?)";
+
+      connection.query(query, [burger, eaten], (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
     });
   },
-  updateOne: (id) => {
-    let query = `SELECT id, burger_name, devoured FROM burgers WHERE id = ?; UPDATE burgers SET devoured = true WHERE id = ?`;
-    connection.connect(query, [id, id], (err, result) => {
-      if (err) {
-        throw err;
-      }
-      console.log(result);
+  //sets burger devoured from false to true
+  updateOne: function (id) {
+    return new Promise((resolve, reject) => {
+      let query = `SELECT id, burger_name, devoured FROM burgers WHERE id = ?; UPDATE burgers SET devoured = true WHERE id = ?`;
+
+      connection.query(query, [id, id], (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
     });
   },
 };
