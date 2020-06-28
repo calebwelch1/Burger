@@ -1,5 +1,4 @@
 // handles display logic
-const path = require('path')
 $(() => {
   $(".change-devoured").on("click", function (e) {
     let id = $(this).data("id");
@@ -34,14 +33,14 @@ $(() => {
     location.reload();
   });
 
-  $.(".delete-burger").on("click", function(e){
-      let id=$(this).data("id");
+  $(".delete-burger").on("click", function (e) {
+    let id = $(this).data("id");
 
-      $.ajax(`api/burgers/${id}`,{
-          type: "DELETE"
-      }).then(()=>{
-          console.log("deleted burger", id)
-          location.reload();
-      })
-  })
+    $.ajax(`api/burgers/${id}`, {
+      type: "DELETE",
+    }).then(() => {
+      console.log("deleted burger", id);
+      location.reload();
+    });
+  });
 });

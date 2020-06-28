@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     })
     .then((result) => {
       // can use .then because we made a promise
-
+      res.render("index", result);
       console.log(result);
     })
     .catch((err) => {
