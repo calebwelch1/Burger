@@ -2,16 +2,18 @@ const orm = require("../config/orm.js");
 const express = require("express");
 let router = express.Router();
 // create routes
-
+// forgot to render
 router.get("/", (req, res) => {
   orm
     .selectAll((data) => {
       let hbsObject = {
-        burger: data,
+        burgers: data,
       };
+      res.render("index", hbsObject);
     })
     .then((result) => {
       // can use .then because we made a promise
+
       console.log(result);
     })
     .catch((err) => {
