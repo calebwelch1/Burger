@@ -1,3 +1,4 @@
 const orm = require("../config/orm");
 
-let burger = {};
+// let burger = {};
+// already hardcoded in the orm
